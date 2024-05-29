@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const allowedOrigins = [
-    'https://incandescent-bublanina-a28cdb.netlify.app/'
+    'https://incandescent-bublanina-a28cdb.netlify.app'
     // Add more origins if necessary
 ];
 
