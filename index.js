@@ -1,17 +1,16 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+const express = require('express')
+const dotenv= require('dotenv').config()
+const mongoose = require('mongoose')
 const cors = require('cors');
 const { userRouter } = require('./Routes/users');
 const { booksRouter } = require('./Routes/books');
 
-dotenv.config();
-
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const allowedOrigins = [
-    'https://incandescent-bublanina-a28cdb.netlify.app'
+    'https://incandescent-bublanina-a28cdb.netlify.app/'
     // Add more origins if necessary
 ];
 
@@ -27,22 +26,22 @@ const corsOptions = {
     credentials: true // If you need to send cookies or authorization headers
 };
 
-// Use the CORS middleware with options
+// Use the CORS middleware
 app.use(cors(corsOptions));
 
-// Routes
-app.use('/api', userRouter);
-app.use('/file', booksRouter);
 
-const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log("MongoDB Connected");
-        app.listen(PORT, () => {
-            console.log("Server connected at PORT: " + PORT);
-        });
+app.use('/api',userRouter);
+app.use('/file',booksRouter)
+
+const PORT = 3000 || process.env.PORT
+
+mongoose.connect(process.env.MONGO_URL)
+.then(()=>console.log("MONGO DB  Connected"))
+.catch((err)=>console.log(err))
+
+
+app.listen(PORT,()=>
+    {
+        console.log("server connected at PORT : "+PORT)
     })
-    .catch((err) => {
-        console.error("MongoDB Connection Error:", err);
-    });
