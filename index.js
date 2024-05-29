@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 const allowedOrigins = [
-    'https://ornate-squirrel-ecb943.netlify.app/'
+    'https://66570203e433138d6a0f8a1b--incandescent-bublanina-a28cdb.netlify.app/'
     // Add more origins if necessary
 ];
 
